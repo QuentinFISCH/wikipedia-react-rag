@@ -14,6 +14,7 @@ This project implements a RAG model for PDF files using ReAct. We want to recrea
 The project is currently in WIP state. In a first time, we implemented a RAG agent using ReAct with Langchain, to see the potential of the ReAct agent. We obtain very positive results, which you can see in the notebook `langchain_react_rag.ipynb` (more explanations on how to use it in the next section).
 The branch `loading_embeddings` contains the code to load embeddings from a PDF file, cutting the content into chunks. These embeddings will next be saved in a vector database.
 Finally, the `main` branch has two test files, `test_llama2.py` and `test_mistral.py`, which are used to test these two LLMs on how they perform on the RAG x ReAct task. This has been quite a long process, even if it does not seem like a lot of work. The prompt engineering is a very long process, and we had to try a lot of different things to understand what could work and what could not. As of today, Llama2 seems to have better results than Mistral, but we are still working on it.
+You will find the intermediate report in the `pdf` folder.
 
 ## Tasks
 
