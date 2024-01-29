@@ -11,9 +11,19 @@ class MyRag:
     and store them in a vector database.
     """
 
-    def __init__(self):
-        self.chroma_client = chromadb.Client()
-        self.collection = self.chroma_client.create_collection(name="documents")
+    def __init__(self, collection_name: str):
+        self.chroma_client = chromadb.PersistentClient(path="./data")
+        self.collection_name = collection_name
+        all_collections = list(
+            map(lambda item: item.name, self.chroma_client.list_collections())
+        )
+        if self.collection_name not in all_collections:
+            self.collection = self.chroma_client.create_collection(
+                name=self.collection_name
+            )
+        else:
+            self.collection = self.chroma_client.get_collection(self.collection_name)
+
         self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en")
 
     def load_pdf(self, path: str) -> tuple:
@@ -52,7 +62,7 @@ class MyRag:
         """
         return self.embedding_model.encode(text)
 
-    def store(self, path: str, chunk_size=500) -> None:
+    def store(self, path: str, chunk_size=500):
         """
         store
         This method will store a vector in the database.
