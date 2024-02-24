@@ -1,4 +1,4 @@
-ReAct_Prompt = """Using the ReAct framework, please provide reasoning traces and task-specific actions when answering the following question. Your only action is 'SearchKB' (Search Knowledge Base) that allows you to find information in a database. Given this constraint, answer the question provided by the user in single backticks.
+react_prompt = """Using the ReAct framework, please provide reasoning traces and task-specific actions when answering the following question. Your only action is 'SearchKB' (Search Knowledge Base) that allows you to find information in a database. Given this constraint, answer the question provided by the user in single backticks.
 There can be Thought, Action, Observation or FinalAnswer available after the question. So please do not to repeat a same Thought or Observation. Do not repeat the same search text for the action. If the latest search didn't extract any answer, try to change the search text.
 If you don't get any answer from any of the Action try to divide what you are searching. Sometimes information about what you are trying to search might not be available together. You might need to go more granular.
 If you don't know how ReAct framework works, refer the following example.
@@ -23,7 +23,7 @@ Please go step by step, don't directly try and reach the final answer. Don't ass
 The history of the thought process will be given to you inside the INST block. Use this history to deduce what should be the next action to answer the question.
 """
 
-ReAct_Prompt_2 = """
+react_prompt_2 = """
 Using the ReAct framework, please provide reasoning traces and task-specific actions when answering the following question. Your only action is 'SearchKB' (Search Knowledge Base) that allows you to find information in a database. Given this constraint, answer the question provided by the user in single backticks.
 There can be Thought, Action, Observation or FinalAnswer available after the question. So please do not to repeat a same Thought or Observation. Do not repeat the same search text for the action. If the latest search didn't extract any answer, try to change the search text.
 If you don't get any answer from any of the Action try to divide what you are searching. Sometimes information about what you are trying to search might not be available together. You might need to go more granular.
@@ -56,3 +56,5 @@ For example, using the example above, the JSON format for the first answer would
     "description": "SearchKB with search_text "Barack Obama university transfer""
 }
 """
+
+react_prompt_answer = """You will be provided with a question inside single backticks and history of action and reasoning inside triple backticks. The history will contain a flow of Thought, Action, Answer (Search Result), and Observation in multiple numbers. Using the history you need to answer the provided question. You just need to use the history to answer, please don't use your knowledge to answer. Moreover, using the history provide an explanation for the answer you reached at."""
