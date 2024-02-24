@@ -1,6 +1,6 @@
 import requests
 import json
-from react.prompt import ReAct_Prompt, ReAct_Prompt_2
+from react.prompt import react_prompt
 
 
 user_input = """
@@ -30,7 +30,7 @@ What is the next action?
 url = 'http://localhost:11434/api/generate'
 data = {
     "model": "llama2",
-    "prompt": prompt.format(react_prompt=ReAct_Prompt_test, user_input=user_input)
+    "prompt": prompt.format(react_prompt=react_prompt, user_input=user_input)
 }
 headers = {'Content-Type': 'application/json'}
 response = requests.post(url, data=json.dumps(data), headers=headers, stream=True)

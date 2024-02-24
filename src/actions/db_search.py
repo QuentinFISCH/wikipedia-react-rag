@@ -1,16 +1,17 @@
 import chromadb
 from sentence_transformers import SentenceTransformer
-from react.llm_call import LLM
+from react.llm_call import LLM, LLM_local
 
 
 SYSTEM_PROMPT = "You are a helpful assistant. You have to use the provided extracted text chunks in triple backticks and answer the user query/question/search provided in single backticks. If the answer is not available in the extracted text you don't answer it."
+
 
 class ActionDBSearch:
     """
     Action to search in a vector database
     """
 
-    def __init__(self, llm: LLM, collection_name: str = "rag"):
+    def __init__(self, llm: LLM | LLM_local, collection_name: str = "rag"):
         self.db = chromadb.Client()
         self.collection = self.db.get_or_create_collection(name=collection_name)
         self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en")

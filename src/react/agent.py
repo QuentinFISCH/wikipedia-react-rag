@@ -1,13 +1,14 @@
 import logging
-from react.llm_call import LLM
+from react.llm_call import LLM, LLM_local
 from react.prompt import react_prompt
 from actions.db_search import ActionDBSearch
 
 MAX_ERROR_COUNT = 5
 
 call_history = []
-llm = LLM()
+llm = LLM_local()
 search = ActionDBSearch(llm)
+
 
 def rag_agent(question: str | None, function: str | None, fn_args: str | None, history: str = "", error_count: int = 0):
     """
