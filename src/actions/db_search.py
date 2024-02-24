@@ -28,7 +28,7 @@ class ActionDBSearch:
         Search in the database
         """
         embedding = self._get_embedding(input_text)
-        return self.collection.query(query_embeddings=embedding, top_k=1)
+        return self.collection.query(query_embeddings=embedding, n_results=1)
 
     def __call__(self, input_text: str):
         """
