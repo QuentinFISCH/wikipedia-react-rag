@@ -27,9 +27,9 @@ You will find the intermediate report in the `pdf` folder.
     * Load file
     * Cut text in chunks
     * Compute embeddings
-- [ ] Choose and setup vector database (Théo, Nicolas)
+- [x] Choose and setup vector database (Théo, Nicolas)
     * ChromaDB ? Pinecone ? MongoDB Atlas Vector Search ? …
-- [ ] Create the main tool with the connection between the LLM and the database using functions from the ReAct framework (Everyone)
+- [x] Create the main tool with the connection between the LLM and the database using functions from the ReAct framework (Everyone)
 - [ ] Build a front to have a more valuable product using Gradio or Streamlit (not defined yet as this is not the most important part)
 
 

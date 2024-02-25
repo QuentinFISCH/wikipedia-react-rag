@@ -3,18 +3,18 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 
 
-class MyRag:
+class MyChromaDB:
     """
-    MyRag class
+    MyChromaDB class
     This class will be used to load pdf files,
     convert them to text and vectorize them,
     and store them in a vector database.
     """
 
-    def __init__(self):
+    def __init__(self, collection_name: str = "rag"):
         self.chroma_client = chromadb.Client()
-        self.collection = self.chroma_client.create_collection(name="documents")
-        self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en")
+        self.collection = self.chroma_client.get_or_create_collection(name=collection_name)
+        self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en", trust_remote_code=True)
 
     def load_pdf(self, path: str) -> tuple:
         """
@@ -23,19 +23,20 @@ class MyRag:
         """
         try:
             pdfFileObj = open(path, "rb")
-            pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+            pdfReader = PyPDF2.PdfReader(pdfFileObj)
             metadata = {
-                "author": pdfReader.metadata.author,
-                "subject": pdfReader.metadata.subject,
-                "title": pdfReader.metadata.title,
+                "author": pdfReader.metadata.author or "",
+                "subject": pdfReader.metadata.subject or "",
+                "title": pdfReader.metadata.title or "",
             }
             res = ""
-            for i in range(pdfReader.numPages):
-                pageObj = pdfReader.getPage(i)
-                res += pageObj.extractText()
+            for i in range(len(pdfReader.pages)):
+                pageObj = pdfReader.pages[i]
+                res += pageObj.extract_text()
             return res, metadata
-        except:
+        except Exception as e:
             print("Error: Could not load pdf file.")
+            print(str(e))
             return "", {}
 
     def split_chunk(self, text: str, chunk_size=500) -> list[str]:
@@ -45,7 +46,7 @@ class MyRag:
         """
         return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
 
-    def vectorize(self, text: str) -> list[float]:
+    def vectorize(self, text: str) -> list[list[float]]:
         """
         vectorize
         This method will convert a string to a vector.
@@ -55,17 +56,21 @@ class MyRag:
     def store(self, path: str, chunk_size=500) -> None:
         """
         store
-        This method will store a vector in the database.
+        This method will store a document in the database.
         """
         text, metadata = self.load_pdf(path)
+        print(metadata)
         chunks = self.split_chunk(text, chunk_size)
-        vectors = [self.vectorize(chunk) for chunk in chunks]
-        self.collection.add(embedding=vectors, metadatas=metadata)
+        print(f"Storing {len(chunks)} chunks in the database.")
+        if chunks:
+            vectors = self.vectorize(chunks)
+            print(vectors.shape)
+            self.collection.add(embeddings=vectors, metadatas=[metadata] * len(chunks), ids=["chunk_" + str(i) for i in range(len(chunks))])
 
     def query(self, query: str, n_results=3):
         """
         query
         This method will query the database for similar vectors.
         """
-        vector = self.vectorize(query)
-        return self.collection.query(embedding=vector, n_results=n_results)
+        vector = self.vectorize([query])
+        return self.collection.query(query_embeddings=vector, n_results=n_results)

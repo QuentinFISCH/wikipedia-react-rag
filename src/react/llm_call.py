@@ -85,6 +85,8 @@ class LLM_local():
         out_split = output_text.split(":")
         function = out_split[0].strip()
         arguments = ":".join(out_split[1:]).strip()
+        print(output_text)
+        print(arguments)
         if function == "FinalAnswer":
             return function, {"reached_final_answer": True}
         if function == "Action":
