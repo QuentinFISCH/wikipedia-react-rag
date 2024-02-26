@@ -5,7 +5,6 @@ LLM call
 import json
 import requests
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from react.prompt import react_prompt, react_prompt_2
 
 
 PROMPT_TEMPLATE = '''[INST] <<SYS>>

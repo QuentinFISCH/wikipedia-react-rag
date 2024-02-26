@@ -2,10 +2,12 @@
 Main file for the ReAct project
 """
 
-from react.agent import rag_agent
+from react.agent import rag_agent, update_search_db
 from react.llm_call import LLM, LLM_local
 from react.prompt import react_prompt_answer
 from utils.ChromaDB import MyChromaDB
+import logging
+
 
 def main(u_input: str):
     """
@@ -20,10 +22,11 @@ def main(u_input: str):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     document_path = input("Enter the path to the document: ")
     document_path = document_path.rstrip().lstrip()
-    MyChromaDB = MyChromaDB().store(document_path)
-    print("Document stored in the database.")
+    update_search_db(document_path)
+    logging.info("Document stored in the database.")
     user_input = input("Enter your question: ")
     user_input = user_input.rstrip().lstrip()
     answer = main(user_input)

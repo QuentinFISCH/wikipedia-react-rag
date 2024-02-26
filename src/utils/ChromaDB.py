@@ -14,7 +14,7 @@ class MyChromaDB:
     def __init__(self, collection_name: str = "rag"):
         self.chroma_client = chromadb.Client()
         self.collection = self.chroma_client.get_or_create_collection(name=collection_name)
-        self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en", trust_remote_code=True)
+        self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en") #, trust_remote_code=True)
 
     def load_pdf(self, path: str) -> tuple:
         """
