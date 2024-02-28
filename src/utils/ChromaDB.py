@@ -14,7 +14,7 @@ class MyChromaDB:
     def __init__(self, collection_name: str = "rag"):
         self.chroma_client = chromadb.Client()
         self.collection = self.chroma_client.get_or_create_collection(name=collection_name)
-        self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en") #, trust_remote_code=True)
+        self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en")  # , trust_remote_code=True)
 
     def load_pdf(self, path: str) -> tuple:
         """
@@ -44,7 +44,7 @@ class MyChromaDB:
         split_chunk
         This method will split a string into chunks of a given size.
         """
-        return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
+        return [text[i: i + chunk_size] for i in range(0, len(text), chunk_size)]
 
     def vectorize(self, text: str) -> list[list[float]]:
         """
@@ -65,7 +65,8 @@ class MyChromaDB:
         if chunks:
             vectors = self.vectorize(chunks)
             print(vectors.shape)
-            self.collection.add(embeddings=vectors, metadatas=[metadata] * len(chunks), ids=["chunk_" + str(i) for i in range(len(chunks))])
+            self.collection.add(embeddings=vectors, metadatas=[metadata] * len(chunks),
+                                ids=["chunk_" + str(i) for i in range(len(chunks))])
 
     def query(self, query: str, n_results=3):
         """

@@ -3,9 +3,8 @@ Main file for the ReAct project
 """
 
 from react.agent import rag_agent, update_search_db
-from react.llm_call import LLM, LLM_local
+from react.llm_call import LLM_local
 from react.prompt import react_prompt_answer
-from utils.ChromaDB import MyChromaDB
 import logging
 
 

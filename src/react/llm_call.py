@@ -6,7 +6,6 @@ import json
 import requests
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-
 PROMPT_TEMPLATE = '''[INST] <<SYS>>
 {system_prompt}
 <</SYS>> [/INST]
@@ -72,7 +71,7 @@ class LLM_local():
         finally:
             response.close()
         return ''.join(full_response)
-    
+
     def function_call(self, input_text: str, system_prompt: str):
         """
         Retrieve the function from the LLM output
@@ -96,7 +95,7 @@ class LLM_local():
         if function == "Observation":
             return function, {"observation_text": arguments}
         return function, {"arguments": arguments}
-    
+
     def __call__(self, input_text: str, system_prompt: str):
         """
         Call the action

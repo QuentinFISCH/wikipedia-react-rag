@@ -23,6 +23,7 @@ model_endpoint = HuggingFaceEndpoint(
 )
 template = "[INST] {prompt} [/INST]"
 
+
 class MistralOutputParser(StrOutputParser):
     """OutputParser that parser llm result from Mistral API"""
 
@@ -52,7 +53,7 @@ class StreamCompletion:
             ]
         )
         output_parser = MistralOutputParser()
-        
+
         try:
             chain = prompt_template | model_endpoint | output_parser
             yield chain.invoke({"prompt": message})
@@ -66,5 +67,8 @@ class StreamCompletion:
 
 # Example usage
 stream_completion = StreamCompletion(model="bigscience/mistral-13b")
-for content in stream_completion("Question: how old am I?" + "\nSearchKB with search_text: \"user's age\"\nSearch Result: I am a 15 years old boy", ReAct_Prompt):
+for content in stream_completion(
+        "Question: how old am I?" + "\nSearchKB with search_text: \"user's age\"\nSearch Result: I am a 15 years old "
+                                    "boy",
+        ReAct_Prompt):
     print(content)

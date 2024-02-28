@@ -2,7 +2,6 @@ import requests
 import json
 from react.prompt import react_prompt
 
-
 user_input = """
 Question: `What is the moto of the university where Barack Obama transferred in 1981?`
 Action: SearchKB with search_text "Barack Obama university transfer"
