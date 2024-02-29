@@ -2,9 +2,9 @@
 Main file for the ReAct project
 """
 
-from react.agent import rag_agent, update_search_db
-from react.llm_call import LLM_local
-from react.prompt import react_prompt_answer
+from src.react.agent import rag_agent, update_search_db
+from src.react.llm_call import LLM_local
+from src.react.prompt import react_prompt_answer
 import logging
 
 

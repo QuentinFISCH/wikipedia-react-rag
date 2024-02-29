@@ -16,7 +16,8 @@ class MyChromaDB:
         self.collection = self.chroma_client.get_or_create_collection(name=collection_name)
         self.embedding_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-en")  # , trust_remote_code=True)
 
-    def load_pdf(self, path: str) -> tuple:
+    @staticmethod
+    def load_pdf(path: str) -> tuple:
         """
         load_pdf
         This method will load a pdf file and convert it to text.
@@ -39,7 +40,8 @@ class MyChromaDB:
             print(str(e))
             return "", {}
 
-    def split_chunk(self, text: str, chunk_size=500) -> list[str]:
+    @staticmethod
+    def split_chunk(text: str, chunk_size=500) -> list[str]:
         """
         split_chunk
         This method will split a string into chunks of a given size.

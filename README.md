@@ -23,7 +23,7 @@ You will find the final report in the `pdf` folder, which details the overall pr
     * Open source ? GPT-4 through OpenAI’s API ? …
     * What is the best prompting method ? What can we do to know which action to take ?
     * …
-- [x] Implement a PDF loader to get a document and extract informations (Théo)
+- [x] Implement a PDF loader to get a document and extract information (Théo)
     * Load file
     * Cut text in chunks
     * Compute embeddings
@@ -33,22 +33,6 @@ You will find the final report in the `pdf` folder, which details the overall pr
 - [ ] Build a front to have a more valuable product using Gradio or Streamlit (not defined yet as this is not the most important part)
 
 The last part as not been done due to time constraints. We decided to focus on the main tool to try to improve the results, which inevitably did not help much.
-
-## Usage of the notebook (Langchain test)
-
-Use poetry to install the dependencies.
-
-```bash
-poetry install
-```
-
-Then create a `.env` file with the following variables:
-
-```bash
-OPENAI_API_KEY=YOUR_API_KEY
-```
-
-You should then be able to run the `langchain_react_rag.ipynb` notebook.
 
 ## Usage of the main tool
 
@@ -69,3 +53,20 @@ Run `main.py` and follow the input steps
 ```bash
 python main.py
 ```
+
+## Usage of the notebook 
+It is a test of the Langchain version.
+
+Use poetry to install the dependencies.
+
+```bash
+poetry install
+```
+
+Then create a `.env` file with the following variables:
+
+```bash
+OPENAI_API_KEY=YOUR_API_KEY
+```
+
+You should then be able to run the `langchain_react_rag.ipynb` notebook.

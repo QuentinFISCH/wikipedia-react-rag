@@ -44,7 +44,7 @@ class LLM:
         return self._get_llm_output(input_text, system_prompt)
 
 
-class LLM_local():
+class LLM_local:
     def __init__(self) -> None:
         self._url = 'http://localhost:11434/api/generate'
         self._headers = {'Content-Type': 'application/json'}

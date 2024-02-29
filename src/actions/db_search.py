@@ -1,7 +1,9 @@
-from react.llm_call import LLM, LLM_local
-from utils.ChromaDB import MyChromaDB
+from ..react.llm_call import LLM, LLM_local
+from ..utils.ChromaDB import MyChromaDB
 
-SYSTEM_PROMPT = "You are a helpful assistant. You have to use the provided extracted text chunks in triple backticks and answer the user query/question/search provided in single backticks. If the answer is not available in the extracted text, don't answer it."
+SYSTEM_PROMPT = ("You are a helpful assistant. You have to use the provided extracted text chunks in triple backticks "
+                 "and answer the user query/question/search provided in single backticks. If the answer is not "
+                 "available in the extracted text, don't answer it.")
 
 
 class ActionDBSearch:

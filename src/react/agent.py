@@ -1,7 +1,7 @@
 import logging
-from react.llm_call import LLM_local
-from react.prompt import react_prompt
-from actions.db_search import ActionDBSearch
+from .llm_call import LLM_local
+from .prompt import react_prompt
+from ..actions.db_search import ActionDBSearch
 
 MAX_ERROR_COUNT = 5
 
